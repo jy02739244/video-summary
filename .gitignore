@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+wrangler.local.toml
+.wrangler/
+.vscode/
+node_modules/
+AGENTS.md

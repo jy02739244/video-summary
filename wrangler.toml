@@ -1,0 +1,5 @@
+# 可提交的基础 Wrangler 配置。
+# 本地开发请使用未提交的 wrangler.local.toml，并通过 --config 显式指定。
+name = "video-summary"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"

@@ -1,0 +1,67 @@
+<svg width="1600" height="520" viewBox="0 0 1600 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="123" y1="34" x2="1478" y2="468" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FBFF" />
+      <stop offset="0.45" stop-color="#EEF6FF" />
+      <stop offset="1" stop-color="#E4F0FF" />
+    </linearGradient>
+    <radialGradient id="glowLeft" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(265 118) rotate(29.134) scale(351.645 210.357)">
+      <stop stop-color="#93C5FD" stop-opacity="0.42" />
+      <stop offset="1" stop-color="#93C5FD" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1325 382) rotate(-161.771) scale(376.384 229.184)">
+      <stop stop-color="#BFDBFE" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#BFDBFE" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="heroCard" x1="928" y1="88" x2="1298" y2="385" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.96" />
+      <stop offset="1" stop-color="#F7FBFF" stop-opacity="0.94" />
+    </linearGradient>
+    <linearGradient id="screen" x1="969" y1="127" x2="1260" y2="312" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5EA2FF" />
+      <stop offset="1" stop-color="#2F6FEA" />
+    </linearGradient>
+    <linearGradient id="pill" x1="145" y1="347" x2="357" y2="388" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA" />
+      <stop offset="1" stop-color="#2563EB" />
+    </linearGradient>
+    <filter id="panelShadow" x="895" y="59" width="441" height="374" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="14"/>
+      <feGaussianBlur stdDeviation="16"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.172549 0 0 0 0 0.392157 0 0 0 0 0.839216 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="520" rx="36" fill="url(#bg)"/>
+  <circle cx="265" cy="118" r="220" fill="url(#glowLeft)"/>
+  <circle cx="1325" cy="382" r="250" fill="url(#glowRight)"/>
+
+  <path d="M0 442C183 405 329 386 516 412C648 430 760 458 920 452C1143 444 1342 351 1600 298V520H0V442Z" fill="#FFFFFF" fill-opacity="0.48"/>
+
+  <rect x="88" y="78" width="694" height="352" rx="30" fill="#FFFFFF" fill-opacity="0.58" stroke="#FFFFFF" stroke-opacity="0.72"/>
+
+  <text x="140" y="168" fill="#0F172A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="72" font-weight="800">Video Summary</text>
+  <text x="142" y="222" fill="#31578A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="600">在线视频结构化总结工具</text>
+  <text x="142" y="278" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24">YouTube / Bilibili / Generic Links</text>
+  <text x="142" y="316" fill="#64748B" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24">Gemini / OpenAI Compatible / KV Cache / History</text>
+
+  <rect x="142" y="348" width="228" height="42" rx="21" fill="url(#pill)"/>
+  <text x="178" y="376" fill="white" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="700">Timestamped Summary</text>
+
+  <g filter="url(#panelShadow)">
+    <rect x="927" y="77" width="377" height="296" rx="30" fill="url(#heroCard)" stroke="white" stroke-opacity="0.84"/>
+    <rect x="962" y="113" width="307" height="197" rx="24" fill="url(#screen)"/>
+    <rect x="990" y="143" width="112" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.96"/>
+    <rect x="990" y="177" width="229" height="12" rx="6" fill="#DCEBFF"/>
+    <rect x="990" y="201" width="194" height="12" rx="6" fill="#BFDBFE"/>
+    <rect x="990" y="236" width="78" height="30" rx="15" fill="#EFF6FF"/>
+    <rect x="1080" y="236" width="130" height="30" rx="15" fill="#F8FBFF" fill-opacity="0.92"/>
+    <rect x="962" y="328" width="117" height="15" rx="7.5" fill="#CBD5E1"/>
+    <rect x="1096" y="328" width="83" height="15" rx="7.5" fill="#93C5FD"/>
+    <rect x="1189" y="328" width="52" height="15" rx="7.5" fill="#F59E0B" fill-opacity="0.76"/>
+  </g>
+</svg>
