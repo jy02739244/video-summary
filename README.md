@@ -28,9 +28,6 @@
   <a href="https://dash.cloudflare.com/?to=/:account/workers-and-pages/create">
     <img src="https://img.shields.io/badge/Deploy-Cloudflare%20Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Deploy to Cloudflare" />
   </a>
-  <a href="https://sumary.661388.xyz/">
-    <img src="https://img.shields.io/badge/Live-Online%20Demo-2563EB?style=for-the-badge" alt="Online Demo" />
-  </a>
   <a href="#-快速开始">
     <img src="https://img.shields.io/badge/Guide-Quick%20Start-111827?style=for-the-badge" alt="Quick Start" />
   </a>
@@ -42,6 +39,10 @@
 > `auto` 模式下，YouTube 链接优先使用 Gemini；如果 `GEMINI_API_KEY`、`GEMINI_MODEL` 中任意一个未配置，且 OpenAI 兼容配置完整，会自动降级到 OpenAI 兼容接口继续总结。`GEMINI_BASE_URL` 为可选项，不配置时默认使用 Gemini 官方地址。
 
 ---
+
+## 🌐 在线体验
+
+[![Online Demo](https://img.shields.io/badge/Live-https%3A%2F%2Fsummary.661388.xyz-2563EB?style=for-the-badge)](https://summary.661388.xyz/)
 
 ## 📸 界面预览
 
@@ -133,10 +134,15 @@ Fork 部署可以保持与上游仓库的关联，方便你后续同步更新：
 
 > [!TIP]
 > 如果上游仓库后续更新，你可以在 GitHub 中点击 **Sync fork** 同步最新代码，Cloudflare 也会随之重新构建部署。
-
-### 🌐 在线体验
-
-[![Online Demo](https://img.shields.io/badge/Live-https%3A%2F%2Fsumary.661388.xyz-2563EB?style=for-the-badge)](https://sumary.661388.xyz/)
+>
+> 连接你 Fork 后的仓库时，Cloudflare 会根据仓库配置自动带出以下默认配置：
+>
+> - 自动绑定 `SUMMARY_CACHE` KV 命名空间
+> - 自动生成默认环境变量：`LLM_PROVIDER=auto`、`SUMMARY_EXPIRATION_DAYS=30`、`GEMINI_MODEL=gemini-2.5-flash`、`GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/models`
+>
+> 如果你使用 **Gemini**，只需要在 Cloudflare 的 **Variables / Secrets** 中手动再增加一个：`GEMINI_API_KEY`
+>
+> 如果你使用 **OpenAI 兼容 API**，还需要手动增加三个环境变量：`OPENAI_BASE_URL`、`OPENAI_API_KEY`、`OPENAI_MODEL`
 
 ### 手动部署（无需本地环境）
 
