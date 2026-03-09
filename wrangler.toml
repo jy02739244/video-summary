@@ -8,7 +8,8 @@ compatibility_date = "2024-11-01"
 # Deploy to Cloudflare 按钮会从这里读取非敏感变量 key，并在部署页面中展示。
 LLM_PROVIDER = "auto"
 SUMMARY_EXPIRATION_DAYS = "30"
-GEMINI_MODEL = ""
-GEMINI_BASE_URL = ""
-OPENAI_BASE_URL = ""
-OPENAI_MODEL = ""
+GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+
+[[kv_namespaces]]
+binding = "SUMMARY_CACHE"
