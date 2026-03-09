@@ -109,14 +109,15 @@ flowchart LR
 
 ## 🚀 快速开始
 
-> [!IMPORTANT]
-> 下方 GitHub / 一键部署链接当前使用仓库占位地址 `https://github.com/<your-github-username>/video-summary`。如果你要把这份 README 直接发布到公开仓库，请将其替换为你的真实 GitHub 仓库地址。
 
 ### ⚡ 一键部署
 
 点击下方按钮，即可跳转到 Cloudflare 的一键部署页面：
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/<your-github-username>/video-summary)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/jy02739244/video-summary)
+
+> [!TIP]
+> 部署按钮会自动读取 `wrangler.toml` 中的非敏感变量和 `.env.example` 中声明的 secret key，并在 Cloudflare 部署页面提示你填写。
 
 ### 🔗 Fork 部署（推荐）
 
@@ -124,7 +125,7 @@ Fork 部署可以保持与上游仓库的关联，方便你后续同步更新：
 
 **第一步**：Fork 本仓库到你的 GitHub 账号
 
-[![Fork this repo](https://img.shields.io/badge/GitHub-Fork_本仓库-blue?style=for-the-badge&logo=github)](https://github.com/<your-github-username>/video-summary/fork)
+[![Fork this repo](https://img.shields.io/badge/GitHub-Fork_本仓库-blue?style=for-the-badge&logo=github)](https://github.com/jy02739244/video-summary/fork)
 
 **第二步**：点击下方按钮，选择 **Continue with GitHub**，然后选择你 Fork 后的仓库进行部署
 
@@ -158,7 +159,7 @@ Fork 部署可以保持与上游仓库的关联，方便你后续同步更新：
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/<your-github-username>/video-summary.git
+git clone https://github.com/jy02739244/video-summary.git
 cd video-summary
 ```
 

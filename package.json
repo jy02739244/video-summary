@@ -11,6 +11,37 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "cloudflare": {
+    "bindings": {
+      "LLM_PROVIDER": {
+        "description": "默认模型模式：auto、gemini 或 openai_compatible。推荐保留 auto。"
+      },
+      "SUMMARY_EXPIRATION_DAYS": {
+        "description": "摘要缓存天数；默认 30，填 0 表示不过期。"
+      },
+      "GEMINI_MODEL": {
+        "description": "Gemini 模型名；启用 Gemini 时必填。"
+      },
+      "GEMINI_BASE_URL": {
+        "description": "Gemini 基础地址；留空时使用 Gemini 官方默认地址。"
+      },
+      "OPENAI_BASE_URL": {
+        "description": "OpenAI 兼容接口地址；启用 OpenAI 兼容模式时必填。"
+      },
+      "OPENAI_MODEL": {
+        "description": "OpenAI 兼容模型名；启用 OpenAI 兼容模式时必填。"
+      },
+      "GEMINI_API_KEY": {
+        "description": "Gemini API Key；启用 Gemini 时必填。"
+      },
+      "OPENAI_API_KEY": {
+        "description": "OpenAI 兼容接口 Key；启用 OpenAI 兼容模式时必填。"
+      },
+      "AUTH_TOKEN": {
+        "description": "站点访问密码；留空则以公开模式运行。"
+      }
+    }
+  },
   "devDependencies": {
     "wrangler": "^3.0.0"
   }
