@@ -118,7 +118,7 @@ flowchart LR
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/jy02739244/video-summary)
 
 > [!TIP]
-> 部署按钮会自动读取 `wrangler.toml` 中的非敏感变量和 `.env.example` 中声明的 secret key，并在 Cloudflare 部署页面提示你填写。
+> 一键部署完成后，你需要前往 Cloudflare Dashboard > Settings > Variables and Secrets 手动添加环境变量（参考下方 [Fork 部署](#-fork-部署推荐) 中的变量表格）。
 
 ### 🔗 Fork 部署（推荐）
 
