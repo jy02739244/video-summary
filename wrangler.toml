@@ -6,11 +6,18 @@ compatibility_date = "2024-11-01"
 keep_vars = true
 
 [vars]
-# Deploy to Cloudflare 按钮会从这里读取非敏感变量 key，并在部署页面中展示。
-LLM_PROVIDER = "auto"
-SUMMARY_EXPIRATION_DAYS = "30"
-GEMINI_MODEL = "gemini-2.5-flash"
-GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+# 所有变量请在 Cloudflare Dashboard > Settings > Variables 中设置。
+# keep_vars = true 会确保这些值在自动部署时不被删除。
+# 以下列出可用变量及其默认值（代码中已内置 fallback，不配置也可运行）：
+# LLM_PROVIDER = "auto"
+# SUMMARY_EXPIRATION_DAYS = "30"
+# GEMINI_MODEL = "gemini-2.5-flash"
+# GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+# GEMINI_API_KEY = ""（建议使用 Secrets）
+# OPENAI_BASE_URL = ""
+# OPENAI_MODEL = ""
+# OPENAI_API_KEY = ""（建议使用 Secrets）
+# AUTH_TOKEN = ""（建议使用 Secrets）
 
 [[kv_namespaces]]
 binding = "SUMMARY_CACHE"

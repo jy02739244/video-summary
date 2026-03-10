@@ -135,14 +135,21 @@ Fork 部署可以保持与上游仓库的关联，方便你后续同步更新：
 > [!TIP]
 > 如果上游仓库后续更新，你可以在 GitHub 中点击 **Sync fork** 同步最新代码，Cloudflare 也会随之重新构建部署。
 >
-> 连接你 Fork 后的仓库时，Cloudflare 会根据仓库配置自动带出以下默认配置：
+> 连接你 Fork 后的仓库时，Cloudflare 会自动绑定 `SUMMARY_CACHE` KV 命名空间。
 >
-> - 自动绑定 `SUMMARY_CACHE` KV 命名空间
-> - 自动生成默认环境变量：`LLM_PROVIDER=auto`、`SUMMARY_EXPIRATION_DAYS=30`、`GEMINI_MODEL=gemini-2.5-flash`、`GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/models`
+> **环境变量不会自动创建，你需要在部署后前往 Cloudflare Dashboard > Settings > Variables and Secrets 手动添加以下变量：**
 >
-> 如果你使用 **Gemini**，只需要在 Cloudflare 的 **Variables / Secrets** 中手动再增加一个：`GEMINI_API_KEY`
->
-> 如果你使用 **OpenAI 兼容 API**，还需要手动增加三个环境变量：`OPENAI_BASE_URL`、`OPENAI_API_KEY`、`OPENAI_MODEL`
+> | 变量名 | 说明 | 是否必需 |
+> |--------|------|----------|
+> | `LLM_PROVIDER` | 模型模式：`auto` / `gemini` / `openai_compatible`，默认 `auto` | 否 |
+> | `SUMMARY_EXPIRATION_DAYS` | 缓存过期天数，默认 `30`，设为 `0` 不过期 | 否 |
+> | `GEMINI_API_KEY` | Gemini API Key（建议加密） | Gemini 模式必需 |
+> | `GEMINI_MODEL` | Gemini 模型名，如 `gemini-2.5-flash` | Gemini 模式必需 |
+> | `GEMINI_BASE_URL` | Gemini 接口地址，默认使用官方地址 | 否 |
+> | `OPENAI_BASE_URL` | OpenAI 兼容接口地址 | OpenAI 模式必需 |
+> | `OPENAI_API_KEY` | OpenAI 兼容接口 Key（建议加密） | OpenAI 模式必需 |
+> | `OPENAI_MODEL` | OpenAI 兼容模型名 | OpenAI 模式必需 |
+> | `AUTH_TOKEN` | 访问密码（建议加密），不配置则公开访问 | 否 |
 
 ### 手动部署（无需本地环境）
 
