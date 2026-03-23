@@ -3282,9 +3282,9 @@ export default {
               role: "user",
               parts: [
                 {
-                  file_data: {
-                    mime_type: "video/youtube",
-                    file_uri: sourceInfo.canonicalUrl,
+                  fileData: {
+                    mimeType: "video/youtube",
+                    fileUri: sourceInfo.canonicalUrl,
                   },
                 },
                 {
