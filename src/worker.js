@@ -2738,6 +2738,48 @@ export default {
         let subscriberText = "";
         let viewCountText = "";
 
+        function getFirstMatchedValue(text, patterns) {
+          for (const pattern of patterns) {
+            const match = text.match(pattern);
+            if (match && match[1]) {
+              return match[1];
+            }
+          }
+          return "";
+        }
+
+        function decodeYouTubeJsonValue(value) {
+          if (!value || typeof value !== "string") return "";
+          return value
+            .replace(/\\u0026/g, "&")
+            .replace(/\\u003d/g, "=")
+            .replace(/\\u002f/g, "/")
+            .replace(/\\\//g, "/");
+        }
+
+        function normalizeYouTubeChannelUrl(urlLike) {
+          const decoded = decodeYouTubeJsonValue(urlLike);
+          if (!decoded) return "";
+          if (decoded.startsWith("http://") || decoded.startsWith("https://")) {
+            return decoded;
+          }
+          if (decoded.startsWith("/")) {
+            return "https://www.youtube.com" + decoded;
+          }
+          return "";
+        }
+
+        function formatNumericCount(rawValue) {
+          if (!rawValue || !/^\d+$/.test(rawValue)) {
+            return rawValue || "";
+          }
+          try {
+            return new Intl.NumberFormat("zh-CN").format(Number(rawValue));
+          } catch (e) {
+            return rawValue;
+          }
+        }
+
         // 1) oEmbed 拿标题 / 作者 / 缩略图
         try {
           const oembedResp = await fetch(
@@ -2760,54 +2802,53 @@ export default {
         // 2) 抓网页 html，解析 publishDate / channelId / 订阅数 / 播放次数
         try {
           const pageResp = await fetch(watchUrl, {
-            headers: { "accept-language": "zh-CN,zh;q=0.9,en;q=0.8" },
+            headers: {
+              "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
+              "user-agent": "Mozilla/5.0",
+            },
           });
           if (pageResp.ok) {
             const html = await pageResp.text();
 
-            // 发布日期：优先匹配 publishDate.simpleText
-            let pubMatch =
-              html.match(
-                /"publishDate"\s*:\s*\{\s*"simpleText"\s*:\s*"([^"]+)"/,
-              );
-            if (pubMatch && pubMatch[1]) {
-              publishedAt = pubMatch[1];
-            }
-            if (!publishedAt) {
-              // 兜底：原先的几种写法
-              const m =
-                html.match(/"publishDate":"(.*?)"/) ||
-                html.match(/"uploadDate":"(.*?)"/) ||
-                html.match(
-                  /<meta\s+itemprop="datePublished"\s+content="([^"]*)"/i,
-                );
-              if (m && m[1]) {
-                publishedAt = m[1];
-              }
-            }
+            publishedAt = decodeYouTubeJsonValue(getFirstMatchedValue(html, [
+              /"publishDate"\s*:\s*\{\s*"simpleText"\s*:\s*"([^"]+)"/,
+              /"publishDate":"([^"]+)"/,
+              /"uploadDate":"([^"]+)"/,
+              /<meta\s+itemprop="datePublished"\s+content="([^"]*)"/i,
+            ]));
 
-            // channelId
-            const cidMatch = html.match(/"channelId":"(UC[0-9A-Za-z_-]+)"/);
+            const ownerProfileUrl = normalizeYouTubeChannelUrl(getFirstMatchedValue(html, [
+              /"ownerProfileUrl":"([^"]+)"/,
+            ]));
+            const canonicalBaseUrl = normalizeYouTubeChannelUrl(getFirstMatchedValue(html, [
+              /"canonicalBaseUrl":"(\/@[^"]+)"/,
+            ]));
+
+            const cidMatch =
+              html.match(/"channelId":"(UC[0-9A-Za-z_-]+)"/) ||
+              html.match(/"externalChannelId":"(UC[0-9A-Za-z_-]+)"/) ||
+              html.match(/"browseId":"(UC[0-9A-Za-z_-]+)"/);
             if (cidMatch && cidMatch[1]) {
               channelId = cidMatch[1];
-              channelUrl = "https://www.youtube.com/channel/" + channelId;
             }
 
-            // 订阅数 subscriberCountText.simpleText
-            const subMatch = html.match(
-              /"subscriberCountText"\s*:\s*\{\s*"accessibility"[\s\S]*?"simpleText"\s*:\s*"([^"]+)"/,
-            );
-            if (subMatch && subMatch[1]) {
-              subscriberText = subMatch[1];
-            }
+            channelUrl = ownerProfileUrl || canonicalBaseUrl || (channelId ? ("https://www.youtube.com/channel/" + channelId) : "");
 
-            // 播放次数 viewCount.videoViewCountRenderer.viewCount.simpleText
-            const viewMatch = html.match(
+            subscriberText = decodeYouTubeJsonValue(getFirstMatchedValue(html, [
+              /"subscriberCountText"\s*:\s*\{\s*"simpleText"\s*:\s*"([^"]+)"/,
+              /"subscriberCountText"\s*:\s*\{[\s\S]*?"label"\s*:\s*"([^"]+)"/,
+            ]));
+
+            const viewCountDisplay = decodeYouTubeJsonValue(getFirstMatchedValue(html, [
               /"viewCount"\s*:\s*\{\s*"videoViewCountRenderer"\s*:\s*\{\s*"viewCount"\s*:\s*\{\s*"simpleText"\s*:\s*"([^"]+)"/,
-            );
-            if (viewMatch && viewMatch[1]) {
-              viewCountText = viewMatch[1];
-            }
+              /"shortViewCount"\s*:\s*\{\s*"simpleText"\s*:\s*"([^"]+)"/,
+            ]));
+            const viewCountNumeric = getFirstMatchedValue(html, [
+              /"viewCount":"(\d+)"/,
+              /<meta\s+itemprop="interactionCount"\s+content="(\d+)"/i,
+            ]);
+            viewCountText = viewCountDisplay || formatNumericCount(viewCountNumeric);
           }
         } catch (e) {
           // 忽略错误
